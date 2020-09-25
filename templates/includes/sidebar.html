@@ -1,0 +1,60 @@
+{% load static %}
+  <ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      
+      <div class="background">
+        <img style="width: 290px; height: 75px;" src="{% static 'image/ghostshell.jpg' %}"><br>
+      </div>
+
+        <a href="#email"><span class="email"></span></a>
+        
+    </div></li>
+
+      <form id="ajax_filter" action="{% url 'FilmFilterView' %}" method="GET" name="filter">
+        <!-- Форма выбора фильтра для поиска фильмов -->
+
+        <br><h5 style="color: #151505; margin-left: 85px;">Date filter</h5>
+        {% for year in view.get_years %}
+            <!-- Выбор года -->
+            <label style="margin-left: 40px;">
+              <input type="checkbox" name="year" value="{{ year.world_premiere_date__year }}" />
+              <span style="color: #151505;">{{ year.world_premiere_date__year }} год</span>
+            </label>
+        {% endfor %}
+
+        <li><div class="divider"></div></li>
+          <br><h5 style="color: #151505; margin-left: 85px;">Category filter</h5>
+          {% for category in view.get_category %}
+              <!-- Выбор категории -->
+              <label style="margin-left: 40px;">
+                <input type="checkbox" name="category" value="{{ category.id }}" />
+                <span style="color: #151505;">{{ category.name }}</span><br>
+              </label>
+          {% endfor %}
+          <br>
+
+          <br><hr><h5 style="color: #151505; margin-left: 85px;">Genre filter</h5>
+          {% for genre in view.get_genre %}
+              <!-- Выбор жанра -->
+              <label style="margin-left: 40px;">
+                <input type="checkbox" name="genre" value="{{ genre.id }}" />
+                <span style="color: #151505;">{{ genre.name }}</span><br>
+              </label>
+          {% endfor %}
+          <br>
+
+        <button style="width: 200px; color: white; background-color: #151505; margin-left: 40px;" class="btn waves-effect waves-light" type="submit">   Search
+          <i class="material-icons right">filter_list</i>
+        </button>
+        
+      </form><br>
+
+    <li style="color: #151505;">&#169; DJANGO Films 2020</li>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="medium material-icons">menu</i></a>
+
+ <script type="text/javascript">
+    $(document).ready(function(){
+      $('.sidenav').sidenav();
+    });
+ </script>  

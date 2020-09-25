@@ -1,0 +1,29 @@
+{% load static %}
+s<hr><br>
+<div style="margin-left: 500px;"><h4><b>Recently added films</b></h4></div>
+<div class="accordion">
+    <ul>
+
+        {% recently_added as movies %}
+
+        {% for movie in movies %}
+            <li>
+                <div class="image_title">
+                    <a href="#"><b>{{ movie.title }}</b></a>
+                </div>
+
+                {% if movie.additional_image %}
+                    <a href="#">
+                        <img src="{{ movie.additional_image.url }}" alt="{{ movie.title }}" border="0">
+                    </a>
+                {% else %}
+                    <a href="#">
+                        <img src="{% static 'image/404_not_found.jpg' %}" alt="{{ movie.title }}" border="0">{{ movie.title }}
+                    </a>
+                {% endif %}
+
+            </li>
+        {% endfor %}
+
+    </ul>
+</div

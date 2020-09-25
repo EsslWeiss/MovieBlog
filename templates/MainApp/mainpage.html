@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  {% load film_tags %}
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}DJANGO Films{% endblock title %}</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script src="{% static 'js/ajaxfilter.js' %}></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pure/2.0.1/base-context-min.min.css"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ratingstarbar.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/filmdetailpage.css' %}">  
+    <link rel="stylesheet" href="{% static 'css/cataloglist.css' %}">
+    <link rel="stylesheet" href="{% static 'css/recentlyaddedbar.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/pulsebutton.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+     
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/sites.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+</head>
+<body>
+
+  <!-- header -->
+  <!-- {% include 'includes/header.html' %} -->
+
+  <!-- Landing Screen -->
+   <div id="p1" class="parallax-container">
+      
+      <div  class="parallax">
+        {% block paralax_wallpaper %}
+            <img src="{% static 'image/clinteastwood.jpg' %}">
+        {% endblock paralax_wallpaper %}
+      </div>
+      
+      <div class="container">
+          <div class="row">
+              
+              <h1 style="color: white;"  class="center">
+                {% block paralax_title %}
+                    DJANGO <b>Films</b>                    
+                {% endblock paralax_title %}
+              </h1>
+
+              <div class="col s12 center white-text">
+
+                  <h5 id="mainText" class="center"><b>
+                    {% block paralax_additional %}
+                         Welcome!
+                     {% endblock paralax_additional %} 
+                  </b></h5>
+
+              </div>
+          </div>
+      </div>      
+  </div>
+
+  <!-- FIXED ACTION BUTTON -->
+  <div class="fixed-action-btn vertical">
+      <a class="btn-floating btn-large  blue-grey darken-4">
+          <i class="fa fa-globe"></i>
+      </a>
+      <ul>
+          <li><a class="btn-floating  blue darken-4"><i class="fa fa-facebook"></i></a></li>
+          <li><a class="btn-floating cyan lighten-1"><i class="fa fa-twitter"></i></a></li>
+          <li><a class="btn-floating grey darken-3"> <i class="fa fa-github"></i></a></li>
+          <li><a class="btn-floating blue-grey lighten-1"><i class="fa fa-linkedin"></i></a></li>
+      </ul>
+  </div>
+
+  {% block content %}
+    <!-- Intro and service -->
+    <div id="intro" class="section black">
+        <div class="container">
+            <div class="row">
+                <div  class="col s12">
+                    <h2 class="center header"> "It's better not to
+                    know so much about what things mean or how they might be
+                  interpreted or you'll be to let things keep happening."</h2>
+                </div>
+            </div>
+            <div class="row center">
+                <div class="col s12 m12 l3">
+                    <img class="responsive-img" src="{% static 'image/prod123.jpg' %}">
+                </div>
+                <dic class="col s12 m12 offset-l1 l8 ">
+                    <h5 class="center"><b>David Lynch</b></h5>
+                </dic>
+            </div>
+        </div>
+    </div>
+
+    <!--Parallax-->
+     <div id="p1" class="parallax-container">
+        <div  class="parallax">
+            <img src="{% static 'image/gx6E79d.jpg' %}">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col s12 center white-text">
+                    <h1><b>Popular movies, best series</b></h1>
+                    <h4 >The catalog features more than 35,000 films and TV shows in Full HD. You can easily find what you need - in our collections or through a search by genre / actor / director.</h4>
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    <!-- Cards group -->
+    <div class="section" style="background-color: #141414;" id="work">
+        <div class="container">
+            <h3 class="header text_b center">TV Series</h3>
+            <div class="row ">
+
+              {% for movie in movies %}
+                <div class="col s12 m12 l4">
+                    <!-- Film cards --> 
+                    <div class="card hoverable black">
+
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="{{ movie.image.url }}">
+                        </div>  
+
+                        <div class="card-content">
+                            <span class="card-title activator purple-text text-lighten-5">
+                              {{ movie.title }} <i class="mdi-navigation-more-vert right"></i>
+                            </span>
+                            
+                            <p><a class="purple-text text-lighten-5" href="#">Project link</a></p>
+                        </div>
+
+                        <div class="card-reveal  black">
+                            <span class="card-title purple-text text-lighten-5">Film description 
+                              <i class="mdi-navigation-close right"></i>
+                            </span>{{ movie.description|safe }}</p>
+                        </div>
+                        
+                    </div>
+                </div>
+              {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+    <div style="background-color: #020406;" class="wrap">
+      <h4><b>Films catalog</b></h4>
+      <a class="button red" href="{% url 'FilmView' %}">Watch films</a>
+    </div>
+
+  {% endblock content %}
+
+  <!-- recently added films tag -->
+  <!-- {% recently_added count=4 %} -->
+
+  <!-- footer -->
+  <!-- {% include 'Includes/footer.html' %} -->
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+        $('.parallax').parallax();
+      });
+  </script>
+
+  </body>
+</html>

@@ -13,8 +13,8 @@ class AbsPerson(models.Model):
 	gender = models.CharField(max_length=6, choices=GENDER_CHOICE)
 	biography = models.TextField()
 	awards = models.TextField()
-	image = models.ImageField(upload_to='')
-	icon = models.ImageField(upload_to='')
+	image = models.ImageField(upload_to='%(class)s_image')
+	icon = models.ImageField(upload_to='%(class)s_icon')
 	url = models.SlugField(unique=True)
 
 	class Meta:

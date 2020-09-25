@@ -1,0 +1,54 @@
+{% load static %}
+  <nav class="black">
+          <div class="container">
+              
+            <div class="nav-wrapper">
+                  <a href="{% url 'MainPageView' %}" class="brand-logo">
+                    <img style="width: 110px; height: 64px;" src="{% static 'image/inthe.jpeg' %}">
+                  </a>
+
+                    <form action="{% url 'SearchManager' %}" class="search" method="GET">
+
+                      <input type="search" name="search" placeholder="films search...">
+
+                    </form>
+
+
+                  <ul class="right hide-on-med-and-down" id="navList">
+            
+                      <li><a href="#contact">Contacts</a></li>
+                  </ul>
+              </div>
+          </div>
+  </nav>
+
+<style type="text/css">
+  $shadow: #fc0;
+  html {
+    background-color:#ccc;
+  }
+
+  .search {
+    margin-right: 260px;
+    display:block;
+    left:50%;
+    position:absolute;
+    top:30%;
+    input[type=search] {
+      border:solid 3px #fff;
+      box-sizing:border-box;
+      font-size:2em;
+      height:2em;
+      margin-left:-15vw;
+      outline:solid #fc0 0;
+      padding:.5em;
+      transition:all 2s ease-in;
+      width:30vw;
+      z-index:1;
+      &:focus {
+        border:solid 3px #09f;      
+        outline:solid #440C10 2000px;
+      }
+    }    
+  }
+</style>
