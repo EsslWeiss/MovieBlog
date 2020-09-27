@@ -1,0 +1,90 @@
+{% extends "MainApp/moviecatalog.html" %}
+
+{% block title %}{{ details.title }}{% endblock title %}
+
+{% block paralax_wallpaper %}
+  <img src="{{ details.background_image.url }}">
+{% endblock paralax_wallpaper %}
+
+{% block paralax_title %}{{ details.title }}{% endblock paralax_title %}
+
+{% block paralax_additional %}
+  <b>Created by {% for producer in details.producers.all %}
+    {{ producer.name }} {{ producer.surname }}
+  {% endfor %}</b>
+{% endblock paralax_additional %}
+
+{% block content %}
+  
+  {% block sidebar %}
+      {{ block.super }}
+  {% endblock sidebar %}
+  
+  <div class="movie-card">
+  
+  <div class="container">
+    <br><br>
+    <a href="#"><img src="{{ details.image.url }}" alt="cover" class="cover" /></a>
+        
+    <div class="hero">
+            
+      <div class="details">
+      
+        <div class="title1"><b>Название: </b>{{ details.title }}</div><br>    
+        {% include 'Includes/ratingstarbar.html' %}
+      </div> <!-- end details -->
+      
+    </div> <!-- end hero -->
+    
+    <div class="description">
+
+      <div class="column1">
+        {% for category in details.category.all %}
+          <b>{{ category.name }}</b>
+        {% endfor %}
+
+        request session --- {{ request.session.star_count }}
+
+      </div> <!-- end column1 -->
+      
+      <div class="column2">
+        
+        <p>{{ details.description|safe }}</p>
+        
+        <div class="avatars">
+          <b>Producers </b> 
+          {% for producer in details.producers.all %}
+            <a href="{{ producer.get_absolute_url }}" data-tooltip="Person 1" data-placement="top">
+              <img style="width: 50px; height: 50px;" src="{{ producer.icon.url }}" alt="avatar1" />
+            </a>
+          {% endfor %}
+          <br><b>Actors </b>
+          {% for actor in details.actors.all %}
+            <a href="{{ actor.get_absolute_url }}" data-tooltip="Person 2" data-placement="top">
+              <img style="width: 50px; height: 50px;" src="{{ actor.icon.url }}" alt="avatar2" />
+            </a>
+          {% endfor %}
+
+        </div> 
+        
+      </div>
+    </div>
+    
+   
+  </div>
+</div>
+
+  <script type="text/javascript">
+
+    const rating = document.querySelector('form[name=rating]');
+
+    rating.addEventListener("change", function (e) {                                                                                                                                
+        let data = new FormData(this);
+        fetch(`${this.action}`, {
+            method: 'POST',
+            body: data
+        }).then(response => alert("Рейтинг принят")).catch(error => alert("Ошибка обработки рейтинга"))
+    });  
+  </script>
+
+{% endblock content %}

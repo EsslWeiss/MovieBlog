@@ -4,9 +4,7 @@ s<hr><br>
 <div class="accordion">
     <ul>
 
-        {% recently_added as movies %}
-
-        {% for movie in movies %}
+        {% for movie in recently_added %}
             <li>
                 <div class="image_title">
                     <a href="#"><b>{{ movie.title }}</b></a>

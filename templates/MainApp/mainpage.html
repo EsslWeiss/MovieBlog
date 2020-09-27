@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   {% load static %}
-  {% load film_tags %}
+  {% load movie_tags %}
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -43,7 +43,7 @@
 <body>
 
   <!-- header -->
-  <!-- {% include 'includes/header.html' %} -->
+  {% include 'includes/header.html' %}
 
   <!-- Landing Screen -->
    <div id="p1" class="parallax-container">
@@ -167,16 +167,16 @@
 
     <div style="background-color: #020406;" class="wrap">
       <h4><b>Films catalog</b></h4>
-      <a class="button red" href="{% url 'FilmView' %}">Watch films</a>
+      <a class="button red" href="{% url 'MovieView' %}">Watch movie</a>
     </div>
 
   {% endblock content %}
 
   <!-- recently added films tag -->
-  <!-- {% recently_added count=4 %} -->
+  {% recently_added_movie count=4 %}
 
   <!-- footer -->
-  <!-- {% include 'Includes/footer.html' %} -->
+  {% include 'Includes/footer.html' %}
 
   <script type="text/javascript">
       $(document).ready(function(){

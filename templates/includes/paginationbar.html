@@ -1,0 +1,250 @@
+<br><br>
+<br><br>
+    <div id="pag-cover">
+        <div id="pg-links">
+
+        {% if page_obj.has_previous %}
+            <div class="td arr-cover">
+                <a style="text-decoration: none;" href="?{{ search }}{{ category }}{{ genre }}{{ year }}page={{ page_obj.previous_page_number }}">
+                    <div class="arrow">
+                        <i class="fas fa-chevron-circle-left"></i>
+                    </div>
+                </a>        
+            </div>
+        {% else %}
+            <div class="td arr-cover">
+                <div class="arrow">
+                    <i class="fa fa-ban"></i>
+                </div>
+            </div>
+        {% endif %}
+
+            <div class="td">
+                <div id="links">
+
+                    {% if page_obj.has_previous %}
+                        <a style="text-decoration: none;" href="?{{ search }}{{ category }}{{ genre }}{{ year }}page={{ page_obj.previous_page_number }}">
+                            <div class="pg-link">
+                                <span>{{ page_obj.previous_page_number }}</span>
+                            </div>
+                        </a>
+                    {% endif %} 
+
+                    <a style="text-decoration: none;" href="?{{ search }}{{ category }}{{ genre }}{{ year }}page={{ page_obj.number }}">
+                        <div class="pg-link" id="m-pg-link">
+                            <span>{{ page_obj.number }}</span>
+                        </div>
+                    </a>
+
+                    {% if page_obj.has_next %}               
+                        <a style="text-decoration: none;" href="?{{ search }}{{ category }}{{ genre }}{{ year }}page={{ page_obj.next_page_number }}">
+                            <div class="pg-link">
+                                <span>{{ page_obj.next_page_number }}</span>
+                            </div>
+                        </a>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        {% if page_obj.has_next %}
+            <div class="td arr-cover">
+                <a style="text-decoration: none;" href="?{{ search }}{{ category }}{{ genre }}{{ year }}page={{ page_obj.next_page_number }}">
+                    <div class="arrow">
+                        <i class="fas fa-chevron-circle-right"></i>
+                    </div>
+                </a>
+            </div>
+        {% else %}
+            <div class="td arr-cover">
+                <div class="arrow">
+                    <i class="fa fa-ban"></i>
+                </div>
+            </div>
+        {% endif %}
+
+        </div>
+    </div>
+<br><br>
+
+<style type="text/css">
+    #pag-cover
+    {
+        top: 50%;
+        right: 0;
+        left: 0;
+        width: 466px;
+        color: #fff;
+        line-height: 1;
+        margin: -35px auto 0 auto;
+
+        background-color: #440C10;
+
+        border-radius: 4px;
+
+        box-shadow: 0 10px 20px #440C10;
+
+        user-select:none;
+    }
+
+    .arr-cover
+    {
+        width: 1px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .arrow
+    {
+        padding: 26px;
+    }
+
+    .arrow i
+    {
+        display: block;
+    }
+
+    #pg-links
+    {
+        display: table;
+        width: 100%;
+    }
+
+    #pg-links .td
+    {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    #links
+    {
+        width: 216px;
+        text-align: center;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    .pg-link
+    {
+        position: relative;
+        width: 22px;
+        float: left;
+        color: #fff;
+        font-size: 20px;
+        text-align: center;
+        padding: 36px 36px;
+        background-color: transparent;
+        transition: 0.2s ease background-color, 0.3s ease color;
+    }
+
+    .pg-link span
+    {
+        position: relative;
+        z-index: 2;
+    }
+
+    .pg-link:hover
+    {
+        background-color: #09060D;
+    }
+
+    .pg-link.s-hide
+    {
+        color: rgba(255,255,255,0);
+    }
+
+    #m-pg-link:after
+    {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #130E1B;
+        transition: 0.3s ease right, 0.3s ease left;
+        z-index: 1;
+    }
+
+    #m-pg-link.left:after
+    {
+        right: 72px;
+        left: -72px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function(){
+    var pg_links = $('.pg-link'), h_elm = $('#m-pg-link'), curr=5, _this, _class, _id, __this, _num, i=0;
+
+    function changeNumbers(flag)
+    {
+        if( ((curr > 2) && (flag == 0)) || flag )
+        {
+            if( curr == 1 )
+            {
+                curr = 2;
+                h_elm.removeClass('left');
+                return;
+            }
+
+            $(pg_links).each(function()
+            { 
+                __this = $(this).find('span');
+                _num = parseInt(__this.text());
+
+                if(flag)
+                    _num += 1;
+                else
+                    _num -= 1;
+
+                ++i;
+
+                pg_links.addClass('s-hide');
+                
+                __this.text(_num);
+                
+                setTimeout(function(){ pg_links.removeClass('s-hide'); },150);
+
+                if( i == 2)
+                    curr = _num;
+
+            });
+            
+            i=0;
+        }
+        else
+        {
+            if( (curr == 2) && (flag == 0) )
+            {
+                curr = 1;
+                h_elm.addClass('left');
+            }
+        }
+    }
+
+    function changeLinks()
+    {
+        _this = $(this);
+        _class = _this.attr('class').trim().toLowerCase();
+
+        if( _class == 'arrow' )
+        {
+            _id = _this.attr('id').trim().toLowerCase();
+
+            if( _id == 'l-arrow' )
+                changeNumbers(0);
+            else
+                changeNumbers(1);
+        }
+        else
+        {
+            if( parseInt(_this.text().trim()) < curr )
+                changeNumbers(0);
+            else
+                changeNumbers(1);
+        }
+    }
+
+    $('.pg-link,.arrow').on('click',changeLinks);});
+</script>
