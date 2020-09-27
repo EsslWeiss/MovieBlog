@@ -22,8 +22,6 @@ class Category(models.Model):
 class Genre(models.Model):
 	name = models.CharField(max_length=100)
 	description = models.TextField()
-	category = models.ForeignKey(Category, on_delete=models.CASCADE, 
-		related_name='genres', related_query_name='genres_query')
 	url = models.SlugField(max_length=100, unique=True)
 
 	def get_absolute_url(self):
@@ -68,6 +66,8 @@ class Movie(models.Model):
 	actors = models.ManyToManyField(Actor, 
 		related_name='movies', related_query_name='movies_query')
 
+	category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True,
+		related_name='movies', related_query_name='movies_query')
 	genres = models.ManyToManyField(Genre, 
 		related_name='movies', related_query_name='movies_query')
 
