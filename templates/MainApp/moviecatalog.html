@@ -10,23 +10,39 @@
 		{% include 'Includes/sidebar.html' %}
 	{% endblock sidebar %}
 
-	<h4 style="margin-left: 560px;" class="shadowtext">Films <b>catalog</b></h4>
+	<h4 style="margin-left: 560px; color: #fff70a;" class="shadowtext">Films <b>catalog</b></h4>
 	<br><br>
 
 	<div class="filmsfilter">
+
 		{% for movie in movies %}
 			<div id="filmscontent">
 				<div style="margin-left: 100px;" class="card">
 				  <a href="#">
-				    <div class="img1"><img src="{{ movie.image.url }}"></div>
-				    <div class="img2"></div>
 
-				    <div class="title"><a style="color: #DAF7A6;" href="{{ movie.get_absolute_url }}">{{ movie.title }}</a></div>
+				  	{% for obj in movie.movie_shots.all %}
+					    <div class="img1"><img src="{{ obj.image.url }}"></div>
+					    <div class="img2"></div>
+					{% endfor %}
 
-				    <a href="{{ movie.get_absolute_url }}"><div class="catagory">{{ movie.category }} <i class="fas fa-film"></i></div></a>
+				    <div class="title">
+				    	<a style="color: #DAF7A6;" href="{{ movie.get_absolute_url }}">
+				    		{{ movie.title }}
+				    	</a>
+				    </div>
 
-				    {% for genre in film.genres.all %}
-				    	<a href="{{ genre.get_absolute_url }}"><div class="catagory">{{ genre.name }} <i class="fas fa-film"></i></div></a>
+				    <a href="{{ movie.get_absolute_url }}">
+				    	<div class="catagory">
+				    		{{ movie.category }} <i class="fas fa-film"></i>
+				    	</div>
+					</a>
+
+				    {% for genre in movie.genres.all %}
+				    	<a href="{{ genre.get_absolute_url }}">
+				    		<div class="catagory">
+				    			{{ genre.name }} <i class="fas fa-film"></i>
+				    		</div>
+				    	</a>
 				    {% endfor %}
 
 				    <a href="#"><div class="views">20211  <i class="far fa-eye"></i> </div></a>

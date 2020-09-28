@@ -1,5 +1,8 @@
+from django.template.loader import get_template
+
 from django import template
-from .models import Category, Movie
+from MainApp.models import Category, Movie
+
 
 register = template.Library()
 

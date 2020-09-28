@@ -35,27 +35,6 @@ class Genre(models.Model):
 		verbose_name_plural='Genres'
 
 
-class Country(models.Model):
-	COUNTRY_CHOICE = [
-		('USA', 'USA'),
-		('FRA', 'France'), 
-		('GER', 'Germany'),
-		('RUS', 'Russia')
-	]
-
-	name = models.CharField(max_length=20, choices=COUNTRY_CHOICE)
-	date_premiere = models.DateField()
-	box_office = models.PositiveIntegerField(default=0)
-
-	def __str__(self):
-		return self.name
-
-	class Meta:
-		verbose_name='Country'
-		verbose_name_plural='Countries'
-		ordering = ['date_premiere']
-
-
 class Movie(models.Model):
 	title = models.CharField(max_length=100)
 	tagline = models.CharField(max_length=100, default='')
@@ -73,10 +52,8 @@ class Movie(models.Model):
 
 	budget = models.PositiveIntegerField()
 	world_premiere_date = models.DateField()
+	box_office = models.PositiveIntegerField(default=0)	
 
-	country_premiere = models.ManyToManyField(Country, 
-		related_name='movies', related_query_name='movies_query')
-	
 	url = models.SlugField(max_length=120, unique=True)
 	draft = models.BooleanField(default=False)
 

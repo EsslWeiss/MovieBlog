@@ -1,0 +1,14 @@
+{% extends "MainApp/mainpage.html" %}
+
+{% block title %}person catalog{% endblock title %}
+
+{% block content %}
+	{% block sidebar %}
+		{% include 'Includes/sidebar.html' %}
+	{% endblock sidebar %}
+    
+    {% for person in persons %}
+    	<p>{{ person.name }}</p>
+    {% endfor %}
+    
+{% endblock content %}
