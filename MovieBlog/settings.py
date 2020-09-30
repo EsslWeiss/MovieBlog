@@ -12,6 +12,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'AuthApp.CustomUser'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -23,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'MainApp.apps.MainappConfig',
+    'AuthApp.apps.AuthappConfig',
     'ckeditor',
     'ckeditor_uploader',
 ]
