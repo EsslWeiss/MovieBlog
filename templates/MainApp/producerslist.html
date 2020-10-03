@@ -1,0 +1,23 @@
+{% extends "MainApp/mainpage.html" %}
+
+{% block title %}
+    
+{% endblock title %}
+
+{% block content %}
+    {% for producer in producers_list.objects.all %}
+    	<div class="card">
+		  <a href="{% url 'ProducerDetailView' producer.url %}">
+		  	<img src="{{ producer.icon.url }}" alt="{{ producer.name }}" style="width:100%">
+		  </a>
+		  <h1>{{ producer.name }} {{ producer.surname }}</h1>
+		  <p class="title">CEO & Founder, Example</p>
+		  <p>Harvard University</p>
+		  <a href="#"><i class="fa fa-dribbble"></i></a>
+		  <a href="#"><i class="fa fa-twitter"></i></a>
+		  <a href="#"><i class="fa fa-linkedin"></i></a>
+		  <a href="#"><i class="fa fa-facebook"></i></a>
+		  <p><button>About</button></p>
+		</div>
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% extends "MainApp/mainpage.html" %}
+
+{% block title %}
+		About - {{ actor_detail.name }} {{ actor_detail.surname }}
+{% endblock title %}
+
+{% block content %}
+    {{ actor_detail.name }} {{ actor_detail.surname }}
+{% endblock content %}

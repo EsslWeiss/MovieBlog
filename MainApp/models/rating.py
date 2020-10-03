@@ -46,4 +46,3 @@ class Review(models.Model):
 		verbose_name='review'
 		verbose_name_plural='reviews'
 		ordering = ['-date_created']
-

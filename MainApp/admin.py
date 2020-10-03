@@ -3,7 +3,11 @@ from django.utils.html import mark_safe
 
 from .models import Movie, MovieShot, Genre, Category
 from .models import Actor, Producer
+from django.contrib.sessions.models import Session
+
 from .ckeditor_forms import (MovieCKEditorForm, ActorsCKEditorForm, ProducersCKEditorForm)
+
+from modeltranslation.admin import TranslationAdmin
 
 
 class MovieShotInlines(admin.TabularInline):
@@ -45,7 +49,7 @@ class MovieProducersInline(admin.TabularInline):
 	extra = 0
 
 @admin.register(Movie)
-class MovieAdmin(admin.ModelAdmin):
+class MovieAdmin(TranslationAdmin):
 	list_display = ('title', 'tagline', 'description', 'get_producers', 'get_actors', 
 		'get_genres', 'budget', 'world_premiere_date', 'url', 'draft')
 	prepopulated_fields = {'url': ('title', )}
@@ -91,21 +95,21 @@ class MovieShotAdmin(admin.ModelAdmin):
 
 
 @admin.register(Genre)
-class GenreAdmin(admin.ModelAdmin):
+class GenreAdmin(TranslationAdmin):
 	list_display = ('name', 'description', 'url')
 	list_display_links = ('name', 'url')
 	prepopulated_fields = {'url': ('name', )}
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
 	list_display = ('name', 'description', 'url')
 	list_display_links = ('name', 'url')
 	prepopulated_fields = {'url': ('name', )}
 
 
 @admin.register(Actor)
-class ActorAdmin(admin.ModelAdmin):
+class ActorAdmin(TranslationAdmin):
 	list_display = ('name', 'surname', 'gender', 'biography',
 		'awards', 'get_image', 'get_icon', 'url')
 	list_display_links = ('name', 'surname')
@@ -125,7 +129,7 @@ class ActorAdmin(admin.ModelAdmin):
 
 
 @admin.register(Producer)
-class ProducerAdmin(admin.ModelAdmin):
+class ProducerAdmin(TranslationAdmin):
 	list_display = ('name', 'surname', 'gender', 'biography',
 		'awards', 'get_image', 'get_icon', 'url')
 	list_display_links = ('name', 'surname')
@@ -143,6 +147,8 @@ class ProducerAdmin(admin.ModelAdmin):
 	get_image.short_description = 'Image'
 	get_icon.short_description = 'Icon'
 
+
+admin.site.register(Session)
 
 admin.site.site_title = 'Administration Site'
 admin.site.site_header = 'Administration Site'

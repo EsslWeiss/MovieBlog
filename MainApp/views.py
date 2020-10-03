@@ -3,8 +3,9 @@ from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
 
 from .forms import ReviewForm, RatingStarForm
+from AuthApp.forms import UserRegistrationForm
 
-from .models import Movie, Actor, Producer
+from .models import Movie, Actor, Producer, Review
 from .mixins import GenreYearMixin
 
 from itertools import chain
@@ -20,6 +21,7 @@ class MainPageView(ListView):
 		context['movies'] = Movie.objects.filter(draft=False)[:3]
 		context['recently_added_films'] = Movie.objects\
 			.filter(draft=False).order_by('world_premiere_date')
+		context['form'] = UserRegistrationForm
 		return context
 
 
@@ -52,7 +54,7 @@ class SearchManager(GenreYearMixin, ListView):
 		return Movie.objects.filter(title__icontains=self.request.GET.get('search'))
 
 	def get_context_data(self, **kwargs): 
-		context = super().get_context_data(*args, **kwargs)
+		context = super().get_context_data(**kwargs)
 		context['search'] = f'search={self.request.GET.get("search")}&'
 		return context
 
@@ -105,3 +107,30 @@ class MovieFilterView(GenreYearMixin, ListView):
 		context['category'] = self.filter_get_param('category')
 		context['genre'] = self.filter_get_param('genre')
 		return context
+
+
+class ActorListView(ListView):
+	model = Actor
+	context_object_name = 'actors_list'
+	template_name = 'MainApp/actorslist.html'
+
+
+class ProducerListView(ListView):
+	model = Producer
+	context_object_name = 'producers_list'
+	template_name = 'MainApp/producerslist.html'
+
+
+class ProducerDetailView(DetailView):
+	model = Producer
+	slug_field = 'url'
+	context_object_name = 'producer_detail'
+	template_name = 'MainApp/producerdetail.html'
+
+
+class ActorDetailView(DetailView):
+	model = Actor
+	slug_field = 'url'
+	context_object_name = 'actor_detail'
+	template_name = 'MainApp/actordetail.html'
+

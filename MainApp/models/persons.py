@@ -22,8 +22,8 @@ class AbsPerson(models.Model):
 
 
 class Actor(AbsPerson):
-	# def get_absolute_url(self):
-	# 	return reverse('')
+	def get_absolute_url(self):
+		return reverse('ProducerDetailView', kwargs={'slug': self.url})
 
 	def __str__(self):
 		return f'{self.name} {self.surname}'
@@ -34,8 +34,8 @@ class Actor(AbsPerson):
 
 
 class Producer(AbsPerson):
-	# def get_absolute_url(self):
-	# 	return reverse('')
+	def get_absolute_url(self):
+		return reverse('ActorDetailView', kwargs={'slug': self.url})
 
 	def __str__(self):
 		return f'{self.name} {self.surname}'

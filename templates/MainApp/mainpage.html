@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="{% static 'css/pulsebutton.css' %}">
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
 
+    <link rel="stylesheet" href="{% static 'css/button_flip.css' %}">
+    <link rel="stylesheet" href="{% static 'css/catalog_button.css' %}">
+
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
      
@@ -166,9 +169,17 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
     <div style="background-color: #020406;" class="wrap">
-      <h4><b>Films catalog</b></h4>
-      <a class="button red" href="{% url 'MovieView' %}">Watch movie</a>
+      <h4><b>Movie catalog</b></h4>
     </div>
+
+    <div style="margin-top: 10px; margin-bottom: 25px;" class="button-container-1">
+        <span class="mas"><b>Watch</b></span>
+      <a href="{% url 'MainApp:MovieView' %}">
+        <button type="button">Open catalog</button>
+      </a>
+    </div>
+
+  </div>
 
   {% endblock content %}
 

@@ -8,9 +8,6 @@ class Category(models.Model):
 	description = models.TextField()
 	url = models.SlugField(unique=True, max_length=100)
 
-	def get_absolute_url(self):
-		return reverse('')
-
 	def __str__(self):
 		return self.name
 
@@ -23,9 +20,6 @@ class Genre(models.Model):
 	name = models.CharField(max_length=100)
 	description = models.TextField()
 	url = models.SlugField(max_length=100, unique=True)
-
-	def get_absolute_url(self):
-		return reverse('')
 
 	def __str__(self):
 		return self.name
@@ -58,7 +52,7 @@ class Movie(models.Model):
 	draft = models.BooleanField(default=False)
 
 	def get_absolute_url(self):
-		return reverse('')
+		return reverse('MovieDetailView', kwargs={'slug: self.url'})
 
 	def __str__(self):
 		return self.title
