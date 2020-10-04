@@ -1,12 +1,4 @@
-                {% if request.user.is_authenticated %}
-                   <div style="display: table-cell;" class="flip">
-                      <a href="{% url 'AppAuth:UserLogoutView' %}">
-                        <div class="front">Log out</div>
-                        <div class="back">{{ request.user.email }}</div>
-                      </a>
-                    </div>
 
-                {% else %}
                     <div style="display: table-cell;" class="flip modal-btn">
                       <a href="https://dribbble.com/shots/2507318-start-rollover">
                         <div class="front">Log in</div>
@@ -20,8 +12,6 @@
                         <div class="back">:)</div>
                       </a>
                     </div>
-                {% endif %}
-
 
               <div class='modal'>
                 <div class='close'>
@@ -43,18 +33,17 @@
 
                         <form action="{% url 'AppAuth:UserLoginView' %}" method="post">
                           {% csrf_token %}
-                          <p>Already Signed Up?</p>
 
                             <div class='field'>
-                              {{ form.email.errors }}
-                              <label for='{{ form.email.id_for_label }}'>Email Address</label>
-                              {{ form.email }}
+                              <p style="color: black;">{{ login_form.username.errors }}</p>
+                              <label for='{{ login_form.username.id_for_label }}'>Email Address</label>
+                              {{ login_form.username }}
                             </div>
 
                             <div class='field'>
-                              {{ form.password1.errors }}
-                              <label for='{{ form.password1.id_for_label }}'>Password</label>
-                              <p>{{ form.password1 }}</p>
+                              <p style="color: black;">{{ login_form.password.errors }}</p>
+                              <label for='{{ login_form.password.id_for_label }}'>Password</label>
+                              <p>{{ login_form.password }}</p>
                             </div>
                           
                           <div class='field'>
@@ -71,22 +60,22 @@
                           <p>New Here?</p>
 
                             <div class='field'>
-                              {{ form.email.errors }}
-                              <label for='{{ form.email.id_for_label }}'>Email Address</label>
-                              {{ form.email }}
+                              {{ signup_form.email.errors }}
+                              <label for='{{ signup_form.email.id_for_label }}'>Email Address</label>
+                              {{ signup_form.email }}
                             </div>
 
 
                             <div class='field'>
-                              {{ form.password1.errors }}
-                              <label for='{{ form.password1.id_for_label }}'>Password</label>
-                              <p>{{ form.password1 }}</p>
+                              {{ signup_form.password1.errors }}
+                              <label for='{{ signup_form.password1.id_for_label }}'>Password</label>
+                              <p>{{ signup_form.password1 }}</p>
                             </div>
 
                             <div class='field'>
-                              {{ form.password2.errors }}
-                              <label for='{{ form.password2.id_for_label }}'>Repeat Password</label>
-                              {{ form.password2 }}
+                              {{ signup_form.password2.errors }}
+                              <label for='{{ signup_form.password2.id_for_label }}'>Repeat Password</label>
+                              {{ signup_form.password2 }}
                             </div>
 
                           <div class='field'>

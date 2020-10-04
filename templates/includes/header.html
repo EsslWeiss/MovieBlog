@@ -1,5 +1,6 @@
 {% load static %}
-  
+{% load auth_tags %}
+
   <nav class="black">
           <div class="container">
               
@@ -14,8 +15,19 @@
                     </form>
 
                   <ul style="display: table; margin-right: -120px; margin-top: 5px;" class="right hide-on-med-and-down" id="navList">
+
+                  {% if request.user.is_authenticated %}                
+                    <div style="display: table-cell;" class="flip">
+                      <a href="{% url 'AppAuth:UserLogoutView' %}">
+                        <div class="front">Log out</div>
+                        <div class="back">{{ request.user.email }}</div>
+                      </a>
+                    </div>  
+                  {% else %}
                     
-                    {% include 'AuthApp/AuthTemplate.html' %}
+                    {% authentication_bar %}
+                  
+                  {% endif %}
                 
                   </ul>
       </div>

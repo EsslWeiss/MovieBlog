@@ -3,7 +3,7 @@ from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
 
 from .forms import ReviewForm, RatingStarForm
-from AuthApp.forms import UserRegistrationForm
+# from AuthApp.forms import AuthForm
 
 from .models import Movie, Actor, Producer, Review
 from .mixins import GenreYearMixin
@@ -21,7 +21,6 @@ class MainPageView(ListView):
 		context['movies'] = Movie.objects.filter(draft=False)[:3]
 		context['recently_added_films'] = Movie.objects\
 			.filter(draft=False).order_by('world_premiere_date')
-		context['form'] = UserRegistrationForm
 		return context
 
 

@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+from django.urls import reverse_lazy
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent  # ./MovieBlog
@@ -45,10 +47,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Authentication
+
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
     'AuthApp.backends.EmailOnlyBackend',
+    'django.contrib.auth.backends.ModelBackend'
 ]
+
+LOGIN_REDIRECT_URL = reverse_lazy('MainApp:MovieView')
+
+LOGOUT_REDIRECT_URL = reverse_lazy('MainApp:MainPageView')
+
 
 ROOT_URLCONF = 'MovieBlog.urls'
 
