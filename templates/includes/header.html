@@ -22,7 +22,11 @@
                         <div class="front">Log out</div>
                         <div class="back">{{ request.user.email }}</div>
                       </a>
-                    </div>  
+
+                    </div> 
+
+                    {% include 'includes/user_side_bar.html' %}
+                    
                   {% else %}
                     
                     {% authentication_bar %}

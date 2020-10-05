@@ -1,5 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import (
+	UserCreationForm, UserChangeForm, PasswordResetForm
+)
 
 from .models import CustomUser
 from django.conf import settings 
@@ -43,7 +45,8 @@ class SigninForm(forms.ModelForm):
 
 
 class LoginForm(AuthenticationForm):
-	
+
 	class Meta:
 		model = CustomUser
 		fields = ('email', 'password')
+

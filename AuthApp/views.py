@@ -2,8 +2,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 
 from django.views.generic.edit import FormView
-from django.contrib.auth.views import LoginView, LogoutView
 
+from django.contrib.auth.views import (
+	LoginView, LogoutView
+) 
+
+from django.contrib.auth.forms import UserChangeForm, PasswordResetForm
+from django.contrib.auth.views import PasswordChangeView
 from .forms import SigninForm, LoginForm
 
 from django.contrib.auth import authenticate, login, logout
@@ -61,3 +66,12 @@ class UserLogoutView(LogoutView):
 		if next_page:
 			return HttpResponseRedirect(next_page)
 		return super().dispatch(request, *args, **kwargs)
+
+
+class UserPasswordChangeView(PasswordChangeView):
+	template_name='MainApp/mainpage.html'
+	success_url = reverse_lazy('MainApp:MainPageView')
+	form_class = UserChangeForm
+
+	def form_valid(self, form):
+		pass
