@@ -1,14 +1,171 @@
 <footer class="section page-footer black">
-    <div style="background-color: #fff70a;">
-	    <b class="title">Get email subscribe </b>
-    </div>
+    
+    <div style="background-color: #fff70a; height: 70px;">
+    	
+    	<div style="margin-left: 350px; height: 20px;" class="container">
 
+				<div  class="subscribe subscribe-1">
+				  <a href="#" class="subscribe__toggle" id="toggle">Email Subscribe</a>
+				  <span class="subscribe__success">You're all in set, check your email.</span>
+
+				  <div class="subscribe__wrapper">
+				  	{% if request.user.is_authenticated %}
+
+					  	<form action="" method="post">
+					  		{% csrf_token %}
+						    <input type="text" value="{{ request.user.email }}" />
+						    <button id="submit">Subscribe</button>			
+					    </form>				  	
+				  	
+				  	{% else %}
+
+					  	<form action="" method="post">
+					  		{% csrf_token %}
+					  		<input type="text" value="{{ request.user.email }}" />
+					  		<button id="submit">Get subscribe</button>
+					  	</form>
+					    
+				  	{% endif %}
+				  </div>
+				</div>
+
+		  </div>
+		</div>
+    	
     <div class="container center-align">
           &#169; DJANGO Films 2020
     </div>
 </footer>
 
 <style type="text/css">
+
+	* {
+	  box-sizing: inherit;
+	}
+
+	.subscribe-1 {
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+
+	  width: 170px;
+	  height: 5em;
+	  /*margin: auto;*/
+	  margin-left: 700px;
+	  margin-top: -;
+	  padding: 1em 0.75em;
+	  border: 3px solid transparent;
+	  border-radius: 8px;
+	  overflow: hidden;
+	  -webkit-transition: width 0.15s ease;
+	  transition: width 0.15s ease;
+	}
+
+	.subscribe-1__active {
+	  width: 250px;
+	  border: 3px solid #358ecc;
+	}
+
+	.subscribe-1__success {
+	  border: 3px solid #4cce95;
+	}
+
+	.subscribe-1 input[type="text"] {
+	  color: #358ecc;
+	  width: 75%;
+	  height: 100%;
+	  margin-right: 2%;
+	  padding-left: 0.5em;
+	  padding-right: 0.5em;
+	  font-size: 1rem;
+	  border: 0;
+	  outline: 0;
+	}
+
+.subscribe-1 button {
+  -webkit-box-flex: 1;
+          flex-grow: 1;
+  border: 0;
+  border-radius: 4px;
+  background: #2a72a4;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  -webkit-transition: background 0.2s ease;
+  transition: background 0.2s ease;
+}
+.subscribe-1 button:hover {
+  background: #358ecc;
+}
+
+.subscribe__wrapper {
+  height: 100%;
+  display: -webkit-box;
+  display: flex;
+}
+
+.subscribe__toggle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #2a72a4;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.25em;
+  line-height: 70px;
+  border-radius: 4px;
+  -webkit-transition: opacity 0.15s ease, background 0.2s ease;
+  transition: opacity 0.15s ease, background 0.2s ease;
+}
+.subscribe__toggle__hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.subscribe__toggle:hover {
+  background: #358ecc;
+}
+
+.subscribe__success {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  line-height: 70px;
+  color: #4cce95;
+  text-align: center;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: opacity 0.25s 0.2s ease;
+  transition: opacity 0.25s 0.2s ease;
+}
+.subscribe__success--active {
+  opacity: 1;
+}
+
+.more-concepts {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  text-decoration: none;
+  color: grey;
+}
+.more-concepts:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
 	.title{
 		margin-left: 550px;
 		font-size: 18px;
@@ -19,3 +176,23 @@
 		background-color: #000000;
 	}
 </style>
+
+<script type="text/javascript">
+	
+	var toggle = document.getElementById('toggle'),
+  wrapper = document.querySelectorAll('.subscribe'),
+  submit = document.getElementById('submit'),
+  success = document.querySelectorAll('.subscribe__success'),
+  content = document.querySelectorAll('.subscribe__wrapper');
+
+	toggle.addEventListener('click', function() {
+	  this.className += ' subscribe__toggle__hidden';
+	  wrapper[0].className += ' subscribe-1__active';
+	});
+
+	submit.addEventListener('click', function() {
+	  success[0].className += ' subscribe__success--active';
+	  wrapper[0].className += ' subscribe-1__success';
+	  content[0].style.display = 'none';
+	});
+</script>

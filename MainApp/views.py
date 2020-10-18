@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.views.generic.base import View 
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormView
 
-from .forms import ReviewForm, RatingStarForm
-# from AuthApp.forms import AuthForm
+from .forms import ReviewForm, RatingStarForm, EmailSubscribeForm
 
 from .models import Movie, Actor, Producer, Review
 from .mixins import GenreYearMixin
@@ -133,3 +133,16 @@ class ActorDetailView(DetailView):
 	context_object_name = 'actor_detail'
 	template_name = 'MainApp/actordetail.html'
 
+
+# from .servise import send
+# from django.core.mail import send_mail
+
+
+class EmailSubscribeView(FormView):
+	form_class = EmailSubscribeForm
+	success_url = '/'
+	template_name = 'MainApp/mainpage.html'
+
+	def form_valid(self, form):
+		form.save()
+		return super().form_valid()

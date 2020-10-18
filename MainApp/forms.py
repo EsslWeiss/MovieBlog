@@ -18,3 +18,7 @@ class RatingStarForm(forms.ModelForm):
 	class Meta:
 		model = Rating 
 		fields = ('star', )
+
+
+class EmailSubscribeForm(forms.Form):
+	email = forms.EmailField()

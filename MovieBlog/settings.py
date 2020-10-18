@@ -12,8 +12,9 @@ SECRET_KEY = '-diho_b_w&m5v5k%)rd((#7f8isdvpmu@!=a4r!ezwqla$z*7('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# here 
+# if DEBUG:
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 
@@ -221,3 +222,17 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+
+# SMTP
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = 'flynnestwood@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'playstation5'
+
+EMAIL_PORT = 587
+
