@@ -1,8 +1,8 @@
-from django.urls import path
+from django.urls import path, re_path
 from django.contrib.auth.views import LoginView, LogoutView
 
 from .views import (
-	UserSignupView, UserLoginView, UserLogoutView, UserPasswordChangeView
+	UserSignupView, UserLoginView, UserLogoutView, VerifiedAccountView
 )
 
 from django.contrib.auth import views as auth_views 
@@ -14,6 +14,9 @@ urlpatterns = [
 	path('log-in/', UserLoginView.as_view(), name='UserLoginView'), 
 	path('log-out/', UserLogoutView.as_view(), name='UserLogoutView'),
 	
+	re_path('verified-account/(?P<uuid>[0-9a-f-]+)/', 
+		VerifiedAccountView.as_view(), name='verified_account'), 
+
 	path('password-change/done/', 
 		auth_views.PasswordChangeDoneView.as_view(), 
 		name='password_change_done'),

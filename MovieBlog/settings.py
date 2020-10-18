@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 from django.urls import reverse_lazy
 
+from celery.schedules import crontab
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent  # ./MovieBlog
@@ -11,12 +13,6 @@ SECRET_KEY = '-diho_b_w&m5v5k%)rd((#7f8isdvpmu@!=a4r!ezwqla$z*7('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-# here 
-# if DEBUG:
-#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
 
 ALLOWED_HOSTS = []
 
@@ -67,7 +63,7 @@ LOGOUT_REDIRECT_URL = reverse_lazy('MainApp:MainPageView')
 
 ROOT_URLCONF = 'MovieBlog.urls'
 
-TAMPLATE_DIR = (os.path.join(BASE_DIR, 'templates'))
+TAMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 TEMPLATES = [
     {
@@ -232,7 +228,23 @@ EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_HOST_USER = 'flynnestwood@gmail.com'
 
-EMAIL_HOST_PASSWORD = 'playstation5'
+EMAIL_HOST_PASSWORD = 'estkeeper'
 
 EMAIL_PORT = 587
+
+
+# Redis settings
+
+REDIS_HOST = '0.0.0.0'
+REDIS_PORT = '6379'
+
+
+# Celery settings
+
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visability_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 

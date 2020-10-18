@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+	redis:
+		image: redis
+		command: redis-server
+		ports:
+			- '6379:6379'
+	web:
+		build: .
+		command: python3 manage.py runserver 0.0.0.0:8000
+		volumes:
+			- .:/MovieBlog
+		ports:
+			- '8000:8000'
+	celery:
+		build: .
+		command: celery -A MovieBlog worker -B
+		volumes:
+			- .:/MovieBlog
+		links:
+			- redis

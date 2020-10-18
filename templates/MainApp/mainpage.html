@@ -42,6 +42,11 @@
   <link href="{% static 'css/sites.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
   <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+
+   <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+   <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+
 </head>
 <body>
 
@@ -187,7 +192,8 @@
   {% recently_added_movie count=4 %}
 
   <!-- footer -->
-  {% include 'Includes/footer.html' %}
+  {% include 'includes/footer.html' %}
+
 
   <script type="text/javascript">
       $(document).ready(function(){
